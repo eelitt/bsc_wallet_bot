@@ -1,8 +1,12 @@
 from web3 import Web3
-import config  # Konfiguraatiot BSC_RPC_URL:lle
+from dotenv import load_dotenv
+import os
+
+load_dotenv()  # Lataa .env-tiedosto moduulin käyttöön
 
 # Yhdistä BSC-verkkoon
-web3 = Web3(Web3.HTTPProvider(config.BSC_RPC_URL))
+bsc_rpc_url = os.getenv('BSC_RPC_URL', 'https://bsc-dataseed.binance.org/')  # Default jos puuttuu
+web3 = Web3(Web3.HTTPProvider(bsc_rpc_url))
 
 # Standardi ERC-20 ABI tarvittaville funktioille (balanceOf, symbol, decimals)
 ERC20_ABI = [
